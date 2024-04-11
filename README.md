@@ -1,14 +1,39 @@
-# Welcome to your CDK TypeScript project
+# CDK Web Application Stack Sample
 
-This is a blank project for CDK development with TypeScript.
+## The construction this stack provisions
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+- The ALB can only be accessed via HTTP on port 80.
+- The URL can be confirmed from the console after provisioning.
+- The ALB performs a health check for the root path `/`. The application should return a response 200 for the root path.
 
-## Useful commands
+![](./doc/img/architecture.png)
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+## Deployment
+
+### Prerequisites
+
+- `AWS CLI V2` is installed.
+- `node.js` and `npm` are installed.
+
+### How to Deploy
+
+1. Clone this repository.
+2. Install the required packages with `npm i`.
+3. Bootstrap CDK with `npm run cdk -- bootstrap`.
+4. Deploy the stack with `npm run cdk -- deploy`.
+5. After the ECR repository is created, push the Docker image.
+   - You can see the build & push commands in the Amazon ECR console
+6. Wait for the creation of resources to complete.
+7. Once completed, you can connect to the application by accessing the URL displayed in `Output:`.
+
+## Database
+
+Database information will be set in the environment variables of the ECS container. The settings are as follows.
+
+| Environment Variable | Value                                 |
+| -------------------- | ------------------------------------- |
+| DB_HOST              | DB host name                          |
+| DB_PORT              | DB port (default: 3306)               |
+| DB_NAME              | Default database name (default: mydb) |
+| DB_USER              | Default user name                     |
+| DB_PASS              | Auto-generated password               |

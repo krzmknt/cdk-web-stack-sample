@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# RDS の情報が設定されていることを確認
+echo "DB_HOST:  $DB_HOST"
+echo "DB_PORT:  $DB_PORT"
+echo "DB_NAME:  $DB_NAME"
+echo "DB_USER:  $DB_USER"
+echo "DB_PASS:  $DB_PASS"
+
+curl -I https://google.com
+nc -vz $DB_HOST $DB_PORT
